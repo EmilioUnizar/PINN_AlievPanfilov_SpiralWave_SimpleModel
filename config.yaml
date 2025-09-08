@@ -1,0 +1,49 @@
+# sweep_config.yaml
+program: sweep.py  # or whatever your main training script is called
+method: bayes  # or "bayes"/"random" depending on your search strategy
+
+metric:
+  goal: minimize  # or "maximize" depending on your metric
+  name: test_global_l2_error  # replace with your actual validation metric name
+
+parameters:
+  input_dim:
+    values: [3]  # Input dimension to test
+  dim_hidden:
+    values: [64]  # Hidden layer dimensions to test
+  n_hidden:
+    values: [5]  # Number of hidden layers to test
+  output_dim:
+    values: [2]  # Output dimension to test
+  seed:
+    values: [1]
+  scheduler_type:
+    values: ['plateau']  # Scheduler types to test
+  lr:
+    values: [5.e-4]  # Learning rates to test
+  batch_size:
+    values: [512]  # Batch sizes to test
+  epochs:
+    values: [500]  # Number of epochs to test
+  ratio:
+    values: [0.1]  # Ratios to test
+  factor_ph:  
+    distribution: log_uniform_values
+    min: 1.0e-5
+    max: 1.0 # Physics loss coefficients to test
+  factor_ic:
+    distribution: log_uniform_values 
+    min: 1.0e-5
+    max: 1.0 # Initial condition loss coefficients to test
+  factor_bc:
+    distribution: log_uniform_values
+    min: 1.0e-5
+    max: 1.0 # Boundary condition loss coefficients to test
+  validation_freq:
+    values: [1]  # Validation frequency to test
+  test_gif_freq:
+    values: [15000]  # Test GIF frequency to test
+  warmup_epochs:
+    values: [0]  # Warmup epochs to test
+
+
