@@ -1,137 +1,66 @@
-<div align="center"> 
+# PINN Aliev-Panfilov Spiral Wave – Simple Model
 
-# PINN Solver for Inverse Diffusion Problem
-**Authors: Mikel Martinez and Lucas Tesán**
-*Aragón Institute of Engineering Research*
-*University of Zaragoza*
+Simulación de arritmia cardíaca utilizando **Redes Neuronales Físicamente Informadas (PINNs)** sobre el modelo de **Aliev-Panfilov**.  
+El proyecto permite explorar la dinámica de ondas espirales en tejidos cardíacos mediante entrenamiento con **PyTorch Lightning**.
 
-[![Project page](https://img.shields.io/badge/-Project%20page-green)](https://amb.unizar.es/people/)
-[![Lucas T](https://img.shields.io/badge/-Linkdln%20page%20Lucas-blue)](https://www.linkedin.com/in/lucas-tesan-ingbiozar/)
-[![Mikel M.](https://img.shields.io/badge/-Linkdln%20page%20Mikel-blue)](https://www.linkedin.com/in/mikel-m-iparraguirre-80196b13b/)
+---
 
-</div>
+## 🚀 Instalación
 
-Welcome to the **PINN Solver for Inverse Diffusion Problem**! This repository contains a MATLAB implementation of a Physics-Informed Neural Network (PINN) designed to solve inverse diffusion problems using a 0-10 plaque domain with boundary conditions and a sinusoidal initial condition.
+Clona este repositorio y asegúrate de tener Python 3.9+:
 
-## Overview
+```bash
+git clone https://github.com/EmilioUnizar/PINN_AlievPanfilov_SpiralWave_SimpleModel.git
+cd PINN_AlievPanfilov_SpiralWave_SimpleModel
+pip install -r requirements.txt
+```
 
-The PINN Solver for Inverse Diffusion Problem is an advanced computational tool built to tackle inverse problems in diffusion dynamics using modern machine learning techniques. Leveraging Physics-Informed Neural Networks (PINNs), this solver integrates physical laws into the learning process, ensuring accurate and efficient solutions.
+Dependencias principales:
+- [PyTorch Lightning](https://www.pytorchlightning.ai/)  
+- [PyTorch](https://pytorch.org/)  
+- NumPy  
 
-<div align="center">
-<img src="/graphic_material/inverse.png" width="450">
-</div>
+---
 
+## ▶️ Uso
 
-### Problem Formulation
+Ejecutar una simulación estándar:
 
-- **Domain:** 0 ≤ x ≤ 10, 0 ≤ y ≤ 10
-- **Boundary Conditions:** \( u(x, y, t) = 0 \) on the domain boundaries
-- **Initial Condition:** Sinusoidal distribution 
+```bash
+python main.py
+```
 
-This setup is ideal for testing and benchmarking PINN-based solutions for diffusion problems with known boundary and initial conditions.
+Lanzar un barrido de parámetros definido en `config.yaml`:
 
-## Features
+```bash
+python sweep.py
+```
 
-- **MATLAB Implementation:** Ready-to-run code for MATLAB users.
-- **PINN Integration:** Harnesses the power of PINNs to solve inverse diffusion problems efficiently.
-- **Lightning Integration:** Utilizes PyTorch Lightning for streamlined training and evaluation of neural networks. (Note: This feature assumes PyTorch and PyTorch Lightning are installed and properly configured.)
-- **Weights & Biases (wandb) Control:** Integrates with Weights & Biases for experiment tracking, hyperparameter tuning, and visualization. Ensure you have a wandb account and API key configured.
+---
 
-## Installation
+## ⚙️ Configuración
 
-To get started with the PINN Solver, follow these steps:
+Los parámetros del barrido se encuentran en `config.yaml`:
 
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/LucasUnizar/PINN_pl_diff_2D.git
+- `factor_ph`  
+- `factor_bc`  
+- `factor_ic`  
 
-2. **Navigate to the Directory:**
-   ```bash
-   cd PINN_pl_diff_2D
+---
 
-3. **Add Dependencies:**
-   ```bash
-   pip install torch torchvision torchaudio pytorch-lightning wandb
+## 📊 Resultados esperados
 
-## Script Usage
-### Command-Line Arguments
+En esta sección se añadirán más adelante gráficas y visualizaciones de las simulaciones (ondas espirales, dinámicas de propagación, etc.).
 
-|     Argument              |             Description                           | Options                                               |
-|---------------------------| ------------------------------------------------- |------------------------------------------------------ |
-| `--train`                 | Train mode                                        | `True`, `False`                                       |
-| `--input_dim`             | Input dimension int                               | Default: `3`                                          |
-| `--ioutput_dim`           | Output dimension int                              | Default: `2`                                          |
-| `--dim_hidden`            | Dimension of hidden layers                        | Default: `70`                                         |
-| `--lr`                    | Learning rate                                     | Default: `1e-4`                                       |
-| `--batch_size`            | Training batch size                               | Default: `2`                                          |
-| `--max_epoch`             | Maximum number of training epochs                 | Default: `1500`                                       |
+---
 
-## Running the Script
-**To Train the Model**
-To train the model, run the script with the --train flag. You can customize other parameters as needed.
-   ```bash
-   python script.py --train --input_dim 4 --hidden_dim 128 64 --output_dim 3 --max_epochs 100 --batch_size 64 --lr 1e-5 --wandb_project MyPINNProject --wandb_entity my_wandb_entity
-   ```
+## 🤝 Contribuir
 
-**To Test the Model**
-To test the model, run the script without the --train flag. Ensure the model has been previously trained.
-   ```bash
-   python script.py --input_dim 4 --hidden_dim 128 64 --output_dim 3 --max_epochs 100 --batch_size 64 --lr 1e-5 --wandb_project MyPINNProject --wandb_entity my_wandb_entity
-   ```
+Las contribuciones son bienvenidas.  
+Si encuentras un problema o quieres proponer mejoras, abre un **issue** o envía un **pull request**.
 
-## Plots and gifs
-**Here is a visualization of the inference in the hole rollout for u(x,y,t):**
+---
 
-<div align="center">
-<img src="/outputs/plots/pred_vs_gt_evolution_3D.gif" width="450">
-</div>
+## 📜 Licencia
 
-**Here we can follow the evolution of the prediction for the diffusion coefficent:**
-
-<div align="center">
-<img src="/outputs/plots/alpha_evolution_3D.gif" width="450">
-</div>
-
-**Finally, we can also plot the quadratic error for the simulation:**
-
-<div align="center">
-<img src="/outputs/plots/qerror_evolution_3D.gif" width="450">
-</div>
-
-## Neural Network Training Overview
-
-This section provides an overview of the neural network training process, focusing on the decomposition of the total loss into its constituent components and the results of solving the inverse problem.
-The total loss function is defined as the sum of several loss components, each measuring a different aspect of the model's performance:
-
-**Data Loss:** Measures the error between the model predictions and observed data, guiding the network to fit the empirical data accurately.
-
-**Physics Loss:** Ensures the model predictions adhere to physical laws and constraints, improving the consistency and plausibility of the results.
-
-**BC and IC Loss:** Enforces the boundary and initial conditions, ensuring the model's predictions are accurate at critical points, enhancing overall reliability.
-
-The total loss is defined as the sum of individual loss components:
-
-$$
-\text{Total Loss} = \sum_{i=1}^{n} \text{Loss}_i
-$$
-
-Where:
-- Loss_i represents each individual loss component contributing to the total loss.
-
-In addition, the training evolution of these metrics is shown as a line graph for 50 epoch:
-
-<div align="center">
-<img src="/graphic_material/lossplot.png" width="450">
-</div>
-
-On the other hand, the estimation of the diffusion coefficient is shown as part of the solution of the inverse problem:
-
-<div align="center">
-<img src="/graphic_material/Dplot.png" width="450">
-</div>
-
-With a final value of 9,7 and considering a ground thruth of 10 in de numerical solver.
-
-<div align="center">
-<img src="/graphic_material/amb.jpg" width="450">
-</div>
+Este proyecto se distribuye bajo la licencia MIT.  
