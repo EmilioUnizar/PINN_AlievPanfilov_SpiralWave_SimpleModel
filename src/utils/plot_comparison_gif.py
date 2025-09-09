@@ -36,7 +36,7 @@ def plot_predictions_vs_true(
 
         u_pred_frame = u_pred[:, :, i]
         u_true_frame = u_true[:, :, i]
-        error = np.abs(u_pred_frame - u_true_frame)
+        error = np.log10(np.abs(u_pred_frame - u_true_frame))
 
         if u_train_mask is not None:
             mask_frame = u_train_mask[:, :, i]
